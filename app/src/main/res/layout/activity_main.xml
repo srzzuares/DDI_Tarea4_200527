@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/loliss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lolita2" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@android:style/Widget.Material.TextView"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="245px"
+            android:layout_marginTop="130px"
+            android:fontFamily="@font/semi_bold_italic"
+            android:padding="0px"
+            android:rotation="8"
+            android:rotationX="25"
+            android:rotationY="-12"
+            android:text="DDI 200527"
+            android:textAlignment="textStart"
+            android:textColor="#459A15"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
+            android:typeface="monospace" />
+
+        <TextView
+            android:id="@+id/saltante"
+            style="@android:style/Widget.Material.TextView"
+            android:layout_width="122dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="130px"
+            android:layout_marginTop="240px"
+            android:fontFamily="@font/semiexpand_bold_itali"
+            android:rotation="12"
+            android:rotationX="25"
+            android:rotationY="-46"
+            android:text="Feliz"
+            android:textAlignment="textStart"
+            android:textColor="#22FFF8"
+            android:textSize="100px"
+            android:textStyle="bold|italic"
+            android:typeface="monospace" />
+
+    </FrameLayout>
+</LinearLayout>
