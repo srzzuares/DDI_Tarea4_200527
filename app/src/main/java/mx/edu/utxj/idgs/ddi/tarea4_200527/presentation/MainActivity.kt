@@ -1,16 +1,11 @@
-/* While this template provides a good starting point for using Wear Compose, you can always
- * take a look at https://github.com/android/wear-os-samples/tree/main/ComposeStarter and
- * https://github.com/android/wear-os-samples/tree/main/ComposeAdvanced to find the most up to date
- * changes to the libraries and their usages.
- */
+
 
 package mx.edu.utxj.idgs.ddi.tarea4_200527.presentation
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.GestureDetector
+import android.view.MotionEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -30,66 +25,50 @@ import mx.edu.utxj.idgs.ddi.tarea4_200527.R
 import mx.edu.utxj.idgs.ddi.tarea4_200527.presentation.theme.Tarea4_200527Theme
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var gestureDetector: GestureDetector
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        super.onCreate(savedInstanceState)setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.saltante)
-        textView.setOnClickListener {
-            // Crear la animación de brillo
-            val scaleX = ObjectAnimator.ofFloat(textView, "scaleX", 1.0f, 1.2f, 1.0f)
-            val scaleY = ObjectAnimator.ofFloat(textView, "scaleY", 1.0f, 1.2f, 1.0f)
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(scaleX, scaleY)
-            animatorSet.duration = 3000
-            animatorSet.start()
-
-        }
-
-
-
-        val imageview = findViewById<ImageView>(R.id.loliss)
-        imageview.setOnClickListener {
-            // Crear la animación de brillo
-            val scaleX = ObjectAnimator.ofFloat(imageview, "scaleX", 1.0f, 1.2f, 1.0f)
-            val scaleY = ObjectAnimator.ofFloat(imageview, "scaleY", 1.0f, 1.2f, 1.0f)
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(scaleX, scaleY)
-            animatorSet.duration = 3000
-            animatorSet.start()}
+        gestureDetector = GestureDetector(this, MyGestureListener())
     }
-}
 
-@Composable
-fun WearApp(greetingName: String) {
-    Tarea4_200527Theme {
-        /* If you have enough items in your list, use [ScalingLazyColumn] which is an optimized
-         * version of LazyColumn for wear devices with some added features. For more information,
-         * see d.android.com/wear/compose.
-         */
-        Column(
-                modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colors.background),
-                verticalArrangement = Arrangement.Center
-        ) {
-            Greeting(greetingName = greetingName)
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        return gestureDetector.onTouchEvent(event)
+    }
+
+    inner class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
+        private val SWIPE_THRESHOLD = 100
+        private val SWIPE_VELOCITY_THRESHOLD = 100
+
+        override fun onFling(
+            event1: MotionEvent,
+            event2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            val diffX = event2.x - event1.x
+            val diffY = event2.y - event1.y
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (diffX > 0) {
+                        // Deslizamiento de izquierda a derecha, navegar a la actividad izquierda
+                        val intent = Intent(this@MainActivity, LeftActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // Deslizamiento de derecha a izquierda, volver a la actividad principal
+                        finish()
+                    }
+                    return true
+                }
+            }
+            return super.onFling(event1, event2, velocityX, velocityY)
         }
     }
 }
 
-@Composable
-fun Greeting(greetingName: String) {
-    Text(
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.primary,
-            text = stringResource(R.string.hello_world, greetingName)
-    )
-}
+private infix fun Unit.setContentView(activityMain: Int) {
 
-@Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    WearApp("Preview Android")
 }
