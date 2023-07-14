@@ -1,4 +1,4 @@
-package mx.edu.utxj.idgs.ddi.tarea4_200527.complication
+package mx.edu.utxj.tidgs.ddi.ddi_tarea_4.complication
 
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
@@ -34,8 +34,8 @@ class MainComplicationService : SuspendingComplicationDataSourceService() {
     }
 
     private fun createComplicationData(text: String, contentDescription: String) =
-            ShortTextComplicationData.Builder(
-                    text = PlainComplicationText.Builder(text).build(),
-                    contentDescription = PlainComplicationText.Builder(contentDescription).build()
-            ).build()
+        ShortTextComplicationData.Builder(
+            text = PlainComplicationText.Builder(text).build(),
+            contentDescription = PlainComplicationText.Builder(contentDescription).build()
+        ).build()
 }

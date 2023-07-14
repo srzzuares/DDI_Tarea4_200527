@@ -1,4 +1,4 @@
-package mx.edu.utxj.idgs.ddi.tarea4_200527.presentation.theme
+package mx.edu.utxj.tidgs.ddi.ddi_tarea_4.presentation.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -8,12 +8,12 @@ import androidx.wear.compose.material.Typography
 
 // Set of Material typography styles to start with
 val Typography = Typography(
-        body1 = TextStyle(
-                fontFamily = FontFamily.Default,
-                fontWeight = FontWeight.Normal,
-                fontSize = 16.sp
-        )
-        /* Other default text styles to override
+    body1 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    )
+    /* Other default text styles to override
     button = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.W500,
